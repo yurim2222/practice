@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "DEIGITAL";
+  src: url(./font/DS-DIGIB.TTF);
+}
+body {
+  font-family: "DEIGITAL";
+  background-color: black;
+  color: orange;
+  font-size: 80px;
+}
+.timer {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  translate: -50%;
+  text-align: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.btn {
+  align-items: center;
+  text-align: center;
+  display: flex;
+}
+.get_botton {
+  cursor: pointer;
+  margin-right: 60px;
+  color: black;
+  width: 200px;
+  background-color: orange;
+}
+.date {
+  margin-right: 15px;
+  float: right;
+  font-size: 40px;
+}
+.time {
+  width: 100%;
+  font-size: 150px;
+}
