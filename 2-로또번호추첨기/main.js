@@ -22,12 +22,13 @@ clickBtn,addEventListener("click", () => {
       clearInterval(interval);
       setTimeout(() => {
         let randomPlusNum;
-        randomPlusNum = Math.floor(Math.random() * 45) + 1;
+        
+          randomPlusNum = Math.floor(Math.random() * 45) + 1;
         while (numbers.includes(randomPlusNum));
 
         plusNum.textContent = randomPlusNum;
         console.log(numbers, randomPlusNum);
-      }, 1000);
+      }, 3000);
     }
   }, 1000);
 });
