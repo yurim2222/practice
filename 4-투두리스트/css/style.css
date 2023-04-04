@@ -184,36 +184,14 @@ body {
   position: absolute;
   right: 100px;
 }
-<<<<<<< HEAD
-=======
-#confirmBtn{
-    background-color: #fce0d0;
-    width: 50px;
-    border: none;
-    border-radius: 5px;
-    margin-left: 10px;
-    padding: 5px;
-}
-.task-container{
-    text-align: center;
-    line-height: 30px;
-    width: 100%;
-    display: flex;
-    margin-top: 20px;
-    padding-left: 20px;
-    padding-bottom: 20px;
-    box-sizing: border-box;
-    
-}
-.task-container h3{
-    margin-left: 20px;
-margin-right: 30px;
-}
-.task-container p{
-margin-right: 30px;
-}
-.task-container span{
+.task-container button{
     position: absolute;
     right: 30px;
+    top: 30px;
+    width: 50px;
+    height: 25px;
+    background-color: #fff;
+    border:1px solid #bbe0f8;
+    border-radius: 5px;
+    cursor: pointer;
 }
->>>>>>> fae7e39204d233894e1b571918f47c9b50503028

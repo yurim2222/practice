@@ -16,99 +16,6 @@ function Product(title, content, time, createtime) {
   this.content = content;
   this.time = time;
   this.createtime=createtime;
-<<<<<<< HEAD
-=======
-}
-
-const confirmBtn = document.getElementById("confirmBtn");
-const countNumber = document.querySelector(".countNumber");
-
-confirmBtn.addEventListener("click", () => {
-  const title = todoTitle.value;
-  const content = todoContents.value;
-  const time = todoScheduletime.value;
-
-  // Check if any of the fields are empty
-  if (!title || !content || !time) {
-    alert("다시 입력해주세요");
-    return;
-  }
-
-  const newTodo = new Product(title, content, time);
-  todoInfo.push(newTodo);
-
-  // Clear input fields
-  todoTitle.value = "";
-  todoContents.value = "";
-  todoScheduletime.value = "";
-
-  // Update task count
-  countNumber.textContent = todoInfo.length;
-
-  // Create task element
-  const main = document.querySelector(".main");
-  const taskContainer = document.createElement("div");
-  taskContainer.classList.add("task-container");
-  const checkBox = document.createElement("div");
-  checkBox.style.width = "25px";
-  checkBox.style.height = "25px";
-  checkBox.style.border = "1px solid #bbe0f8";
-  const taskTitle = document.createElement("h3");
-  taskTitle.textContent = title;
-  const taskContent = document.createElement("p");
-  taskContent.textContent = content;
-  const createtime = document.createElement("time");
-  const now = new Date();
-  const hour = now.getHours().toString().padStart(2, '0');
-  const minute = now.getMinutes().toString().padStart(2, '0');
-  createtime.textContent = `${hour}:${minute}`;
-  
-  
-  const taskTime = document.createElement("span");
-  taskTime.textContent = time;
-
-
-  taskContainer.appendChild(checkBox);
-  taskContainer.appendChild(taskTitle);
-  taskContainer.appendChild(taskContent);
-  taskContainer.appendChild(createtime);
-  taskContainer.appendChild(taskTime);
-  main.appendChild(taskContainer);
-  
-});
-
-// Load saved data from localStorage
-const savedTodos = JSON.parse(localStorage.getItem("todos"));
-
-if (savedTodos) {
-  // If there is saved data, update todoInfo and task count
-  todoInfo = savedTodos;
-  countNumber.textContent = todoInfo.length;
-
-  // Create task elements for saved data
-  const main = document.querySelector(".main");
-  savedTodos.forEach((todo) => {
-    const taskContainer = document.createElement("div");
-    taskContainer.classList.add("task-container");
-    const checkBox = document.createElement("div");
-    checkBox.style.width = "25px";
-    checkBox.style.height = "25px";
-    checkBox.style.border = "1px solid #bbe0f8";
-    const taskTitle = document.createElement("h3");
-    taskTitle.textContent = todo.title;
-    const taskContent = document.createElement("p");
-    taskContent.textContent = todo.content;
-    const taskTime = document.createElement("span");
-    taskTime.textContent = todo.time;
-
-    taskContainer.appendChild(checkBox);
-    taskContainer.appendChild(taskTitle);
-    taskContainer.appendChild(taskContent);
-    taskContainer.appendChild(taskTime);
-    main.appendChild(taskContainer);
-    
-  });
->>>>>>> fae7e39204d233894e1b571918f47c9b50503028
 }
 
 const confirmBtn = document.getElementById("confirmBtn");
@@ -153,21 +60,42 @@ confirmBtn.addEventListener("click", () => {
   const hour = now.getHours().toString().padStart(2, '0');
   const minute = `${now.getMinutes().toString().padStart(2, '0')}`;
   createtime.textContent = `만든 시간 ${hour}:${minute}`;
-  
-  
-  const taskTime = document.createElement("span");
-  taskTime.textContent = "목표시간:"+time;
+  const deletebtn = document.createElement("button");
+deletebtn.textContent = "완료";
 
-<<<<<<< HEAD
+
+
+
+  const taskTime = document.createElement("span");
+  taskTime.textContent = "목표시간"+time;
+
 
   taskContainer.appendChild(checkBox);
   taskContainer.appendChild(taskTitle);
   taskContainer.appendChild(taskContent);
   taskContainer.appendChild(createtime);
   taskContainer.appendChild(taskTime);
+  taskContainer.appendChild(deletebtn);
   main.appendChild(taskContainer);
 
-  // taskTitle클릭시 숨겨진 내용 출력 
+
+  // deletebtn 클릭시 해당 div 삭제하기
+deletebtn.addEventListener("click", () => {
+    // 해당 div의 부모 요소에서 삭제하기
+    taskContainer.parentNode.removeChild(taskContainer);
+  
+    // todoInfo 배열에서 해당 요소 삭제하기
+    const index = todoInfo.indexOf(newTodo);
+    if (index > -1) {
+      todoInfo.splice(index, 1);
+    }
+  
+    // count 갱신하기
+    countNumber.textContent = todoInfo.length;
+  });
+  
+
+  //taskTitle클릭시 숨겨진 내용 출력 
   taskTitle.addEventListener("click", () => {
     const taskContent = taskContainer.querySelector("p");
     const taskTime = taskContainer.querySelector("time");
@@ -187,5 +115,3 @@ confirmBtn.addEventListener("click", () => {
   
 
 
-=======
->>>>>>> fae7e39204d233894e1b571918f47c9b50503028
