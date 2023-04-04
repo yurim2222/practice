@@ -71,9 +71,15 @@ const answer04 = document.querySelector('.quiz04');
 answer04.innerHTML += studentNamesarr;
 console.log(studentNamesarr);
 
+<<<<<<< HEAD
 //시험점수가 80점 미만인 학생을 제외한 새로운 배열//
 const highScore = [];
 const highScoringStudents = students.filter(student => (student.score >= 80));
+=======
+//시험점수가 80점 미만인 학생을 제외한 새로운 배열
+const highScore = [];
+const highScoringStudents = students.filter(student => !(student.score < 80));
+>>>>>>> 40944576bb5cc5d3fadb4e8a3c3b93615cdd7b7a
 highScoringStudents.map(student => highScore.push(`${student.lastName} ${student.firstName}`));
 const answer05 = document.querySelector('.quiz05');
 answer05.innerHTML += `고득점자: ${highScore}`;
@@ -102,7 +108,10 @@ targetScores.forEach(student => {
     </div>
   `;
 });
+<<<<<<< HEAD
 console.log(targetScores);
+=======
+>>>>>>> 40944576bb5cc5d3fadb4e8a3c3b93615cdd7b7a
 
 
 //자격증을 취득한 학생은 총 몇명인가요?
