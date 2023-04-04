@@ -147,3 +147,25 @@ body{
     margin-left: 10px;
     padding: 5px;
 }
+.task-container{
+    text-align: center;
+    line-height: 30px;
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    
+}
+.task-container h3{
+    margin-left: 20px;
+margin-right: 30px;
+}
+.task-container p{
+margin-right: 30px;
+}
+.task-container span{
+    position: absolute;
+    right: 30px;
+}
