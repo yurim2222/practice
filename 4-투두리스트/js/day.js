@@ -5,10 +5,10 @@ const dayOfWeek = [
   "SUN",
   "MON",
   "TUES",
-  "WED",
-  "THU",
+  "WEDNES",
+  "THURS",
   "FRI",
-  "SAT",
+  "SATUR",
 ][today.getDay()];
 document.querySelector(".dayOfWeek").innerHTML = dayOfWeek + "DAY,";
 

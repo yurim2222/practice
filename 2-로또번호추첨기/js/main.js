@@ -45,7 +45,7 @@ clickBtn,addEventListener("click", () => {
         let randomPlusNum;
         
           randomPlusNum = Math.floor(Math.random() * 45) + 1;
-        while (numbers.includes(randomPlusNum))
+        while (numbers.includes(randomPlusNum));
         switch (true) {
           case (randomPlusNum >= 0 && randomPlusNum <= 9):
             plusNum.style.backgroundColor = 'orange';
