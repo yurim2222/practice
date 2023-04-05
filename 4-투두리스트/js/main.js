@@ -27,7 +27,7 @@ confirmBtn.addEventListener("click", () => {
     return;
   }
   
-  // Create a new object with the todo information
+  // newTodo에 입력받은 값 할당 
   const newTodo = {
     title:title,
     content:content,
@@ -35,7 +35,7 @@ confirmBtn.addEventListener("click", () => {
     createtime: new Date()
   };
 
-  // Add the new todo to the todoInfo array
+  // todoInfo 빈 배열에 newTodo 푸시
   todoInfo.push(newTodo);
 
   // 텍스트 초기화 
