@@ -15,6 +15,39 @@ let todoInfo = [];
 const confirmBtn = document.getElementById("confirmBtn");
 const countNumber = document.querySelector(".countNumber");
 
+// delete 함수 정의
+function deleteTask(taskContainer, newTodo) {
+  // 한번 클릭시 checkBox 배경색 빨간색으로 변경하기
+  const checkBox = taskContainer.querySelector("div");
+  checkBox.style.backgroundColor = "red";
+
+  // 두번째 클릭시 해당 div의 부모 요소에서 삭제하기
+  taskContainer.parentNode.removeChild(taskContainer);
+
+  // todoInfo 배열에서 해당 요소 삭제하기
+  const index = todoInfo.indexOf(newTodo);
+  if (index > -1) {
+    todoInfo.splice(index, 1);
+  }
+
+  // count 갱신하기
+  countNumber.textContent = todoInfo.length;
+};
+
+// hidden 메시지 보여주는 함수 정의
+function toggleHiddenContent(taskContainer) {
+  const taskContent = taskContainer.querySelector("p");
+  const taskTime = taskContainer.querySelector("time");
+  if (taskContent.style.display === "none" && taskTime.style.display === "none") {
+    taskContent.style.display = "flex";
+    taskTime.style.display = "flex";
+  } else {
+    taskContent.style.display = "none";
+    taskTime.style.display = "none";
+  }
+};
+
+//confirmBtn 클릭 이벤트 리스너 
 confirmBtn.addEventListener("click", () => {
   const title = todoTitle.value;
   const content = todoContents.value;
@@ -50,12 +83,12 @@ confirmBtn.addEventListener("click", () => {
   const main = document.querySelector(".main");
   const taskContainer = document.createElement("div");
   taskContainer.classList.add("task-container");
-  const checkBox = document.createElement("div");
-  checkBox.style.width = "25px";
-  checkBox.style.height = "25px";
-  checkBox.style.border = "1px solid #bbe0f8";
-  const taskTitle = document.createElement("h3");
-  taskTitle.textContent = title;
+  taskContainer.innerHTML = `
+  <div style="width: 25px; height: 25px; border: 1px solid #bbe0f8;"></div>
+  <h3>${title}</h3>
+  <button>완료</button>
+  <span>목표시간${time}</span>
+`;
   const taskContent = document.createElement("p");
   taskContent.textContent = content;
   const createtime = document.createElement("time");
@@ -63,64 +96,13 @@ confirmBtn.addEventListener("click", () => {
   const hour = now.getHours().toString().padStart(2, '0');
   const minute = `${now.getMinutes().toString().padStart(2, '0')}`;
   createtime.textContent = `만든 시간 ${hour}:${minute}`;
-  const deletebtn = document.createElement("button");
-deletebtn.textContent = "완료";
-
-
-
-
-  const taskTime = document.createElement("span");
-  taskTime.textContent = "목표시간"+time;
-
-
-  taskContainer.appendChild(checkBox);
-  taskContainer.appendChild(taskTitle);
-  taskContainer.appendChild(taskContent);
-  taskContainer.appendChild(createtime);
-  taskContainer.appendChild(taskTime);
-  taskContainer.appendChild(deletebtn);
-  main.appendChild(taskContainer);
-
-
-
-  // deletebtn 클릭시 해당 div 삭제하기
-let isDeleted = false;
-deletebtn.addEventListener("click", () => {
-  // 한번 클릭시 checkBox 배경색 빨간색으로 변경하기
-  checkBox.style.backgroundColor = "red";
-
-  if (isDeleted) {
-    // 두번째 클릭시 해당 div의 부모 요소에서 삭제하기
-    taskContainer.parentNode.removeChild(taskContainer);
-
-    // todoInfo 배열에서 해당 요소 삭제하기
-    const index = todoInfo.indexOf(newTodo);
-    if (index > -1) {
-      todoInfo.splice(index, 1);
-    }
-
-    // count 갱신하기
-    countNumber.textContent = todoInfo.length;
-  } else {
-    isDeleted = true;
-  }
-});
-
   
 
-  //taskTitle클릭시 숨겨진 내용 출력 
-  taskTitle.addEventListener("click", () => {
-    const taskContent = taskContainer.querySelector("p");
-    const taskTime = taskContainer.querySelector("time");
-    if (taskContent.style.display === "none" && taskTime.style.display === "none") {
-    taskContent.style.display = "flex";
-    taskTime.style.display = "flex";}
-    else {
-        taskContent.style.display = "none";
-        taskTime.style.display = "none";
-        }
 
-  });
+  
+  taskContainer.appendChild(taskContent);
+  taskContainer.appendChild(createtime);
+  main.appendChild(taskContainer);
   console.log(todoInfo);
 });
 
