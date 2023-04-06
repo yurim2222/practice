@@ -15,6 +15,8 @@ let todoInfo = [];
 const confirmBtn = document.getElementById("confirmBtn");
 const countNumber = document.querySelector(".countNumber");
 
+// newTodo에 입력받은 값 할당 
+let newTodo = {};
 
 confirmBtn.addEventListener("click", () => {
   const title = todoTitle.value;
@@ -28,11 +30,10 @@ confirmBtn.addEventListener("click", () => {
     return;
   }
   
-  // newTodo에 입력받은 값 할당 
-  const newTodo = {
-    title:title,
-    content:content,
-    time:time,
+  newTodo = {
+    title: title,
+    content: content,
+    time: time,
     createtime: new Date()
   };
 
@@ -68,39 +69,51 @@ confirmBtn.addEventListener("click", () => {
   
   taskContainer.appendChild(taskContent);
   main.appendChild(taskContainer);
-    
+  
+  console.log(todoInfo);
 });
 
 
 
 // 완료"버튼 클릭시 해당 div 삭제하기
 let isDeleted = false;
+let deletedTask = null; // keep track of the task to be deleted
+
 const main = document.querySelector("main");
 main.addEventListener("click", (e) => {
   if (e.target.nodeName === "BUTTON") {
     // 한번 클릭시 checkBox 배경색 빨간색으로 변경하기
-    const checkBox = e.target.parentNode.querySelector(".checkbox");
-    checkBox.style.backgroundColor = "red";
-
-    const deleted = e.target.parentNode.parentNode;
-
-    if (isDeleted) {
-      // 두번째 클릭시 해당 div의 부모 요소에서 삭제하기
-      deleted.parentNode.removeChild(deleted);
-
+    const checkedBox = e.target.parentNode.querySelector(".checkbox");
+    if (checkedBox) {
+      checkedBox.style.backgroundColor = "red";
+    }
+   
+    if (isDeleted && e.target.parentNode === deletedTask) {
+      const taskContainer = deletedTask;
       // todoInfo 배열에서 해당 요소 삭제하기
-      const index = todoInfo.indexOf(newTodo);
+      const index = todoInfo.findIndex(task => task.taskContainer === taskContainer);
+      
       if (index > -1) {
         todoInfo.splice(index, 1);
       }
-
+      // 해당 div의 부모 요소에서 삭제하기
+      taskContainer.parentNode.removeChild(taskContainer);
       // count 갱신하기
       countNumber.textContent = todoInfo.length;
+      // reset deletedTask and isDeleted
+      deletedTask = null;
+      isDeleted = false;
     } else {
+      deletedTask = {
+        taskContainer: e.target.parentNode,
+      };
       isDeleted = true;
     }
+    
+    
   }
 });
+
 
 
 
