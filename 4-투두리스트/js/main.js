@@ -49,8 +49,8 @@ confirmBtn.addEventListener("click", () => {
   countNumber.textContent = todoInfo.length;
 
   // div 요소 생성해서 내용 담기  
-  const main = document.querySelector(".main");
-  const taskContainer = document.createElement("div");
+  const taskWrap = document.querySelector("ul");
+  const taskContainer = document.createElement("li");
   const now = new Date();
   const hour = now.getHours().toString().padStart(2, '0');
   const minute = `${now.getMinutes().toString().padStart(2, '0')}`;
@@ -63,12 +63,7 @@ confirmBtn.addEventListener("click", () => {
   <span>목표시간${time}</span>
   <time>만든 시간${hour}:${minute}</time>
 `;
-  const taskContent = document.createElement("p");
-  taskContent.textContent = content;
-  
-  
-  taskContainer.appendChild(taskContent);
-  main.appendChild(taskContainer);
+  taskWrap.appendChild(taskContainer);
   
   console.log(todoInfo);
 });
@@ -76,51 +71,49 @@ confirmBtn.addEventListener("click", () => {
 
 
 // 완료"버튼 클릭시 해당 div 삭제하기
-let isDeleted = false;
-let deletedTask = null; // keep track of the task to be deleted
 
-const main = document.querySelector("main");
-main.addEventListener("click", (e) => {
+
+ const taskWrap = document.querySelector("ul");
+let deletedTask = null; //null값으로 초기화 한 이유 
+let isDeleted = false;
+
+taskWrap.addEventListener("click", (e) => {
+  console.log(e);
   if (e.target.nodeName === "BUTTON") {
-    // 한번 클릭시 checkBox 배경색 빨간색으로 변경하기
     const checkedBox = e.target.parentNode.querySelector(".checkbox");
     if (checkedBox) {
       checkedBox.style.backgroundColor = "red";
-    }
-   
-    if (isDeleted && e.target.parentNode === deletedTask) {
-      const taskContainer = deletedTask;
-      // todoInfo 배열에서 해당 요소 삭제하기
-      const index = todoInfo.findIndex(task => task.taskContainer === taskContainer);
       
-      if (index > -1) {
-        todoInfo.splice(index, 1);
+     if (isDeleted && e.target.parentNode === deletedTask) { //isDeleted true 이고 부모노드가 deletedTask 인지 
+        const taskContainer = deletedTask;
+        const index = todoInfo.findIndex(task => {
+          return task === taskContainer
+        });//해당 요소 선정하여 삭제 
+        // const index = todoInfo.findIndex(task => task.title === taskContainer.querySelector("h3").textContent);
+
+        console.log(index);
+        if (index >= -1) {
+          todoInfo.splice(index, 1);
+        }
+        taskWrap.removeChild(taskContainer);
+        // 배열 요소의 길이에 따라 count 하기 
+        countNumber.textContent = todoInfo.length;
+
+      } else {
+        deletedTask = e.target.parentNode; //이벤트가 발생한 요소의 부모 노드인 완료버튼을 deletedTask 할당
+        isDeleted = true;
+
+       
+        
       }
-      // 해당 div의 부모 요소에서 삭제하기
-      taskContainer.parentNode.removeChild(taskContainer);
-      // count 갱신하기
-      countNumber.textContent = todoInfo.length;
-      // reset deletedTask and isDeleted
-      deletedTask = null;
-      isDeleted = false;
-    } else {
-      deletedTask = {
-        taskContainer: e.target.parentNode,
-      };
-      isDeleted = true;
     }
-    
-    
   }
 });
 
 
 
-
-
-  
-  //taskTitle클릭시 숨겨진 내용 출력 
-    const taskTitle = document.querySelector("main");
+//taskTitle클릭시 숨겨진 내용 출력 
+    const taskTitle = document.querySelector(".taskWrap");
     taskTitle.addEventListener("click", (e) => {
     if (e.target.nodeName === "H3"){
       const taskContainer = e.target.parentNode;
@@ -136,7 +129,7 @@ main.addEventListener("click", (e) => {
     }
   });
 
-
+ 
   
 
 
